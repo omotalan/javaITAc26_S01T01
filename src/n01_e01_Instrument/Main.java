@@ -12,17 +12,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        WindInstrument flute = new WindInstrument(
+        Instrument flute = new WindInstrument(
                 "flute",
                 75.00
         );
 
-        StringInstrument citar = new StringInstrument(
+        Instrument citar = new StringInstrument(
                 "citar",
                 275.00
         );
 
-        PercussionInstrument agogo = new PercussionInstrument(
+        Instrument agogo = new PercussionInstrument(
                 "agogo",
                 30.00
         );
