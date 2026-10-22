@@ -1,4 +1,4 @@
-package n03_e01_noticiesEsportives.Objects;
+package n03_e01_noticiesEsportives.newsTypes;
 
 public abstract class NewsArticle {
     
@@ -36,6 +36,9 @@ public abstract class NewsArticle {
     public String getTitle()  { return title; }
 
     private String limitText(String text) {
+        if (text == null || text.isBlank()) {
+            throw new IllegalArgumentException("Text cannot be empty");
+        }
         return text.substring(0, Math.min(text.length(), 20));
     }
 
