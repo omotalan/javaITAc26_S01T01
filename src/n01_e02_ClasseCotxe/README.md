@@ -57,8 +57,8 @@ Process finished with exit code 0
 
 ## Quin d’aquests atributs pot ser inicialitzat des del constructor?
 
-Nomès els atributs que no són static. Els static pertanyen a la classe, aixì que inicialitzar-los desde el constructor
-no compilaria - els static es deuen inicialitzar-se juntament amb la propia classe.
+Nomès els atributs que no són `static final`; els `final`es poden inicialitzar desde el constructor si els atribueix valor una ùnica vegada. Els static pertanyen a la classe, aixì que inicialitzar-los desde el constructor
+no es bona pràctica - els static es deuen inicialitzar-se juntament amb la propia classe.
 
 ## Quin no es pot modificar mai?
 
