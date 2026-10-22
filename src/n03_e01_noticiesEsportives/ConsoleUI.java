@@ -1,17 +1,15 @@
 package n03_e01_noticiesEsportives;
 
-import n03_e01_noticiesEsportives.Objects.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import n03_e01_noticiesEsportives.newsTypes.*;
 
 public class ConsoleUI {
-    static Scanner SC = new Scanner(System.in);
-    static List<Writer> writers = new ArrayList<>();
+    private Newsroom newsroom;
 
-    public static void showMenu() {
+    public ConsoleUI(Newsroom newsroom) {
+        this.newsroom = newsroom;
+    }
+
+    static void showMenu() {
         System.out.println("""
 
                 === REDACCIÓ ESPORTIVA ===
@@ -26,123 +24,31 @@ public class ConsoleUI {
                 """);
     }
 
-    // Options
-
-    public static void addWriter() {
-        String dni = readtext("DNI: ");
-        if (searchWriter(dni).isPresent()) {
-            System.out.println("Ja existeix un writer amb aquest DNI.");
-            return;
+    int getOption() {
+        int option;
+        option = Helpers.readNumberInput("Opció: ", newsroom);
+        switch (option) {
+            case 1 -> newsroom.addWriter();
+            case 2 -> newsroom.deleteWriter();
+            case 3 -> newsroom.addNewsArticle();
+            case 4 -> newsroom.deleteNewsArticle();
+            case 5 -> newsroom.showNewsArticles();
+            case 6 -> newsroom.calculatePoints();
+            case 7 -> newsroom.calculatePrice();
+            case 0 -> System.out.println("Adéu!");
+            default -> System.out.println("Opció no vàlida.");
         }
-        String nom = readtext("Nom: ");
-        writers.add(new Writer(nom, dni));
-        System.out.println("Redactor afegit.");
+        return option;
     }
-
-    public static void deleteWriter() {
-        String dni = readtext("DNI del redactor: ");
-        boolean deleted = writers.removeIf(r -> r.getDni().equalsIgnoreCase(dni));
-        System.out.println(deleted ? "Redactor eliminat." : "No s'ha trobat el redactor.");
-    }
-
-    public static void addNewsArticle() {
-        Optional<Writer> writer = demanarWriter();
-        if (writer.isEmpty()) return;
-
-        System.out.println("Tipus: 1-Futbol 2-Bàsquet 3-Tenis 4-F1 5-Motociclisme");
-        int tipus = readNumberInput("Tipus: ");
-        String titular = readtext("Titular: ");
-
-        NewsArticle newsArticle;
-        try {
-            newsArticle = switch (tipus) {
-                case 1 -> new FootballArticle(titular,
-                        readtext("Text: "), readtext("Competició: "), readtext("Club: "), readtext("Jugador: "));
-                case 2 -> new BasketballArticle(titular,
-                        readtext("Text: "), readtext("Competició: "), readtext("Club: "));
-                case 3 -> new TennisArticle(titular,
-                        readtext("Text: "), readtext("Competició: "), readtext("Tenistes: "));
-                case 4 -> new FormulaOneArticle(titular, readtext("Text: "), readtext("Escuderia: "));
-                case 5 -> new MotorbikeArticle(titular, readtext("Text: "), readtext("Equip: "));
-                default -> null;
-            };
-        } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-            return;
-        }
-
-        if (newsArticle == null) {
-            System.out.println("Tipus no vàlid.");
-        } else if (writer.get().addNewsArticle(newsArticle)) {
-            System.out.println("Notícia afegida: " + newsArticle);
-        } else {
-            System.out.println("Aquest writer ja té una notícia amb aquest titular.");
-        }
-    }
-
-    public static void deleteNewsArticle() {
-        Optional<Writer> writer = demanarWriter();
-        if (writer.isEmpty()) return;
-        String titular = readtext("Titular: ");
-        boolean eliminada = writer.get().deleteNewsArticle(titular);
-        System.out.println(eliminada ? "Notícia eliminada." : "No s'ha trobat la notícia.");
-    }
-
-    public static void showNewsArticles() {
-        Optional<Writer> writer = demanarWriter();
-        if (writer.isEmpty()) return;
-        List<NewsArticle> noticies = writer.get().getNewsArticles();
-        if (noticies.isEmpty()) {
-            System.out.println("Aquest writer no té notícies.");
-        } else {
-            noticies.forEach(n -> System.out.println(n.toString()));
-        }
-    }
-
-    public static void calculatePoints() {
-        demanarNewsArticle().ifPresent(n ->
-                System.out.println("Puntuació: " + n.calculatePoints()));
-    }
-
-    public static void calculatePrice() {
-        demanarNewsArticle().ifPresent(n ->
-                System.out.printf("Price: %.2f €%n", n.calculatePriceNewsArticle()));
-    }
-
-    // Helpers
-
-    private static Optional<Writer> searchWriter(String dni) {
-        return writers.stream()
-                .filter(r -> r.getDni().equalsIgnoreCase(dni))
-                .findFirst();
-    }
-
-    private static Optional<Writer> demanarWriter() {
-        String dni = readtext("DNI del redactor: ");
-        Optional<Writer> r = searchWriter(dni);
-        if (r.isEmpty()) System.out.println("No s'ha trobat el redactor.");
-        return r;
-    }
-
-    private static Optional<NewsArticle> demanarNewsArticle() {
-        Optional<Writer> writer = demanarWriter();
-        if (writer.isEmpty()) return Optional.empty();
-        String titular = readtext("Titular: ");
-        Optional<NewsArticle> n = writer.get().searchNewsArticle(titular);
-        if (n.isEmpty()) System.out.println("No s'ha trobat la notícia.");
-        return n;
-    }
-
-    private static String readtext(String missatge) {
-        System.out.print(missatge);
-        return SC.nextLine().trim();
-    }
-
-    public static int readNumberInput(String missatge) {
-        try {
-            return Integer.parseInt(readtext(missatge));
-        } catch (NumberFormatException e) {
-            return -1;
-        }
+    
+    static int displayArticleCategories(Newsroom newsroom) {
+        System.out.println(
+                "Tipus: 1-" + FootballArticle.getCategory() +
+                        " 2-" + BasketballArticle.getCategory() +
+                        " 3-" + TennisArticle.getCategory() +
+                        " 4-" + FormulaOneArticle.getCategory() +
+                        " 5-" + MotorbikeArticle.getCategory()
+        );
+        return Helpers.readNumberInput("Tipus: ", newsroom);
     }
 }

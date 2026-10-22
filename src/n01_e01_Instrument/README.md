@@ -1,8 +1,8 @@
-# Nom del Projecte
+# Instrument
 **Descripció**: Sprint 1, Tasca 1, Nivell 1, Exercici 1
 
-## 📌 Enunciat del exercici (si és aplicable)
-Exercici 1 – Instruments musicals
+## 📌 Exercici 1 – Instruments musicals
+```
 Objectiu
 
 En aquest exercici treballarem els conceptes d’herència i polimorfisme, dues peces clau de la programació orientada a objectes. També aprendrem com funciona la càrrega de classes a Java i descobrirem els blocs estàtics, que són útils per entendre com s’inicialitzen les classes en temps d’execució.
@@ -53,34 +53,33 @@ A més, investiga i documenta per tu mateix:
     Què és un bloc d’inicialització (sense static)?
     Quan s’executa?
     Quina diferència hi ha entre aquest i un bloc static?
+```
 
 ## ✨ Funcionalitats (si és aplicable)
+- Retrieve instrument information
+- "Play" instrument by calling a shared method
 
 ## 🛠 Tecnologies
 - Backend: Java
 
 ## 🚀 Instal·lació i Execució
-1. Clonar el repositori: `git clone ...`
+1. Clonar el repositori: `git clone javaITAc26_S01T01`
 2. Execució del "Main"
+
 
 
 ## 📸 Demo
 ```bash
-Wind instrument created: flute
- Instrument price: 75.0
-String instrument created: citar
- Instrument price: 275.0
-Percussion instrument created: agogo
- Instrument price: 30.0
-Està sonant un instrument de vent
-
-
-Està sonant un instrument de corda
-
-
+/usr/lib/jvm/java-1.21.0-openjdk-amd64/bin/java -javaagent:/home/alan/idea-2026.1.1/idea-IU-261.23567.138/lib/idea_rt.jar=43483 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /home/alan/alan_projects/javaITAc26_S01T01/out/production/javaITAc26_S01T01 n01_e01_Instrument.Main
+Constructor ejecutado: n01_e01_Instrument.objects.WindInstrument@6acbcfc0
+Constructor ejecutado: n01_e01_Instrument.objects.StringInstrument@6f496d9f
+Constructor ejecutado: n01_e01_Instrument.objects.PercussionInstrument@10f87f48
+Instrument created: agogo
 Està sonant un instrument de percussió
-
-
+Instrument created: citar
+Està sonant un instrument de corda
+Instrument created: flute
+Està sonant un instrument de vent
 
 Process finished with exit code 0
 ```

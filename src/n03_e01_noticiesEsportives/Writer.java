@@ -1,4 +1,6 @@
-package n03_e01_noticiesEsportives.Objects;
+package n03_e01_noticiesEsportives;
+
+import n03_e01_noticiesEsportives.newsTypes.NewsArticle;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +15,11 @@ public class Writer {
     private List<NewsArticle> newsArticles = new ArrayList<>();
 
     public Writer(String name, String dni) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        } else if (name.matches(".*\\d.*")) {
+            throw new IllegalArgumentException("Name cannot have numbers");
+        }
         this.name = name;
         this.dni = dni;
     }
@@ -26,8 +33,20 @@ public class Writer {
     }
     
     // Setters
-    public void setName(String name) { this.name = name; }
-    public static void setSalary(double newSalary) { salary = newSalary; }
+    public void setName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Name cannot be empty");
+        } else if (name.matches(".*\\d.*")) {
+            throw new IllegalArgumentException("Name cannot have numbers");
+        }
+        this.name = name;
+    }
+    public static void setSalary(double newSalary) {
+        if (newSalary <= 0.0) {
+            throw new IllegalArgumentException("Salary cannot be zero or negative.");
+        }
+        salary = newSalary;
+    }
 
     // Add or delete articles
     public Optional<NewsArticle> searchNewsArticle(String title) {

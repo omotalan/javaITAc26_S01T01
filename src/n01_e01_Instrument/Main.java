@@ -1,40 +1,45 @@
 package n01_e01_Instrument;
 
+import n01_e01_Instrument.objects.Instrument;
 import n01_e01_Instrument.objects.PercussionInstrument;
 import n01_e01_Instrument.objects.StringInstrument;
 import n01_e01_Instrument.objects.WindInstrument;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        WindInstrument flute = new WindInstrument(
+        Instrument flute = new WindInstrument(
                 "flute",
                 75.00
         );
+        System.out.println("Constructor ejecutado: " + flute);
 
-        StringInstrument citar = new StringInstrument(
+        Instrument citar = new StringInstrument(
                 "citar",
                 275.00
         );
+        System.out.println("Constructor ejecutado: " + citar);
 
-        PercussionInstrument agogo = new PercussionInstrument(
+        Instrument agogo = new PercussionInstrument(
                 "agogo",
                 30.00
         );
+        System.out.println("Constructor ejecutado: " + agogo);
 
+        List<Instrument> llista = List.of(
+                agogo,
+                citar,
+                flute
+        );
 
         // Constructor feedback
-        System.out.println("Wind instrument created: " + flute.getName() + "\n Instrument price: " + flute.getPrice());
-        System.out.println("String instrument created: " + citar.getName() + "\n Instrument price: " + citar.getPrice());
-        System.out.println("Percussion instrument created: " + agogo.getName() + "\n Instrument price: " + agogo.getPrice());
-
-        // Call instrument play
-        flute.play();
-        System.out.println("\n");
-        citar.play();
-        System.out.println("\n");
-        agogo.play();
-        System.out.println("\n");
+        for (Instrument item : llista) {
+            System.out.println("Instrument created: " + item.getName());
+            item.play();
+        }
     }
 }

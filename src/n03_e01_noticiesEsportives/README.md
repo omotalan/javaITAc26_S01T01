@@ -1,8 +1,8 @@
-# Nom del Projecte
+# Noticies Esportives
 **Descripció**: Sprint 1, Tasca 1, Nivell 3, Exercici 1
 
-## 📌 Enunciat del exercici (si és aplicable)
-Exercici 1 – Redacció de notícies esportives
+## 📌 Exercici 1 – Redacció de notícies esportives
+```
 Objectiu
 
 En aquest exercici posaràs en pràctica els conceptes d’herència, atributs estàtics i finals, polimorfisme, i la gestió d’objectes relacionats entre si. També treballaràs amb estructures de dades i faràs ús de la consola per construir una petita aplicació interactiva amb menú.
@@ -108,14 +108,29 @@ A la classe principal del teu programa implementa un menú per consola amb les s
     Mostrar totes les notícies d’un redactor
     Calcular puntuació d’una notícia
     Calcular preu d’una notícia
+```
 
-## ✨ Funcionalitats (si és aplicable)
+## ✨ Descripció de la resolució i Funcionalitats
+Les classes de cada esport hereten de la parent NewsArticle, i es relacionen amb els escriptors de la següent mena:
+- Cada writer s'afegeix a una llista, i s'identifica pel DNI (també quan es busca un writer)
+- Cada instància de writer té la seva llista de NewsArticle 
+  - Consultar o gestionar notícies es fa sempre des de la instància del writer
+  - No hi ha una llista comuna d'articles (crec que és una cosa a millorar, de fet)
+- La gestió de notícies es fa des de la classe Newsroom (que funciona com un servei)
+  - Newsroom crida els helpers de la classe Helpers, aquests helpers es poden cridar des d'altres llocs si cal
+- La interacció amb l'usuari es fa des de ConsoleUI:
+  - Es crea una instància de Newsroom, el que significa que es poden crear i gestionar diversos serveis si cal
+- Main es només el entry point 
+
+El redactor (writer) és el punt central del programa, el que està bé de moment, però idealment es podria crear una
+classe Redacció, que posseiria múltiples redactors.
+
 
 ## 🛠 Tecnologies
 - Backend: Java
 
 ## 🚀 Instal·lació i Execució
-1. Clonar el repositori: `git clone ...`
+1. Clonar el repositori: `git clone javaITAc26_S01T01`
 2. Execució del "Main"
 
 
