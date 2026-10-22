@@ -1,10 +1,11 @@
-package n03_e01_noticiesEsportives.Objects;
+package n03_e01_noticiesEsportives.newsTypes;
 
 public class FootballArticle extends NewsArticle {
 
     private String tournament;
     private String club;
     private String player;
+    private static final String category = "Fútbol";
 
     public FootballArticle(String title, String text, String tournament, String club, String player) {
         super(title, text);
@@ -13,6 +14,10 @@ public class FootballArticle extends NewsArticle {
         this.player = player;
         this.points = calculatePoints();
         this.price = calculatePriceNewsArticle();
+    }
+
+    public static String getCategory() {
+        return category;
     }
 
     private boolean esGran() { return mention(club, "barça", "barca", "madrid", "barcelona", "real madrid"); }
