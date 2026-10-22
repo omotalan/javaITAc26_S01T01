@@ -16,16 +16,19 @@ public class Main {
                 "flute",
                 75.00
         );
+        System.out.println("Constructor ejecutado: " + flute);
 
         Instrument citar = new StringInstrument(
                 "citar",
                 275.00
         );
+        System.out.println("Constructor ejecutado: " + citar);
 
         Instrument agogo = new PercussionInstrument(
                 "agogo",
                 30.00
         );
+        System.out.println("Constructor ejecutado: " + agogo);
 
         List<Instrument> llista = List.of(
                 agogo,
