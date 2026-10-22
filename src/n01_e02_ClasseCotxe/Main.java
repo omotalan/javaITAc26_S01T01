@@ -17,8 +17,8 @@ public class Main {
         Car i20 = new Car("70hp");
 
         // Retrieve model names for each instance; all the same
-        System.out.println("i20 Car instance model name: " + i20.getModel());
-        System.out.println("tucson Car instance model name: " + tucson.getModel());
+        System.out.println("i20 Car instance model name: " + Car.getModel());
+        System.out.println("tucson Car instance model name: " + Car.getModel());
 
     }
 }
